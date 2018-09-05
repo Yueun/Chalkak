@@ -60,6 +60,15 @@ public class DataGenerator {
         return items;
     }
 
+    // 추가
+    public static List<String> getStringTag(Context ctx) {
+        List<String> items = new ArrayList<>();
+        String arr[] = ctx.getResources().getStringArray(R.array.sample_images_name);
+        for (String s : arr) items.add(s);
+        // Collections.shuffle(items);
+        return items;
+    }
+
     /**
      * Generate dummy data CardViewImg
      *

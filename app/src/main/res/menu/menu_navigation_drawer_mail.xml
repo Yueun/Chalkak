@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/grp_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all_inbox"
+            android:checked="true"
+            android:icon="@drawable/ic_move_to_inbox"
+            android:title="모든 메시지"
+            app:actionLayout="@layout/badge_navigation_plain" />
+    </group>
+
+    <group
+        android:id="@+id/grp_2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inbox"
+            android:icon="@drawable/ic_inbox"
+            android:title="받은 메시지"
+            app:actionLayout="@layout/badge_navigation_plain" />
+        <item
+            android:id="@+id/nav_priority_inbox"
+            android:icon="@drawable/ic_label"
+            android:title="보낸 메시지"
+            app:actionLayout="@layout/badge_navigation_colored" />
+        <item
+            android:id="@+id/nav_social"
+            android:icon="@drawable/ic_peoples"
+            android:title="소셜"
+            app:actionLayout="@layout/badge_navigation_colored" />
+    </group>
+
+
+    <item
+        android:checkableBehavior="single"
+        android:title="All labels">
+
+        <group
+            android:id="@+id/grp_3"
+            android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_starred"
+                android:icon="@drawable/ic_star"
+                android:title="추천 사진" />
+            <item
+                android:id="@+id/nav_sent"
+                android:icon="@drawable/ic_send"
+                android:title="내 사진" />
+            <item
+                android:id="@+id/nav_spam"
+                android:icon="@drawable/ic_report"
+                android:title="차단목록"
+                app:actionLayout="@layout/badge_navigation_plain" />
+            <item
+                android:id="@+id/nav_trash"
+                android:icon="@drawable/ic_delete"
+                android:title="휴지통" />
+        </group>
+    </item>
+
+    <group
+        android:id="@+id/grp_5"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="설정" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_help"
+            android:title="도움말" />
+    </group>
+
+</menu>

@@ -22,23 +22,23 @@
     </integer-array>
 
     <string-array name="sample_images_name">
-        <item>Night Street</item>
-        <item>Architect Desk</item>
-        <item>City Building</item>
-        <item>Computer Keyboard</item>
-        <item>Grunge Window</item>
+        <item>1라인</item>
+        <item>2라인</item>
+        <item>3라인</item>
+        <item>4라인</item>
+        <item>5라인</item>
 
-        <item>Park Bench</item>
-        <item>Table Cocktails</item>
-        <item>Side Park</item>
-        <item>Hanging Clothes</item>
-        <item>Coffee Camera</item>
+        <item>6라인</item>
+        <item>7라인</item>
+        <item>6라인</item>
+        <item>7라인</item>
+        <item>6라인</item>
 
-        <item>Morning Flower</item>
-        <item>Foggy Hill</item>
-        <item>The Backpacker</item>
-        <item>River Forest</item>
-        <item>Mist Mountain</item>
+        <item>7라인</item>
+        <item>6라인</item>
+        <item>7라인</item>
+        <item>6라인</item>
+        <item>7라인</item>
     </string-array>
 
     <integer-array name="people_images">

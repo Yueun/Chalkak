@@ -12,10 +12,20 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import kr.ac.pusan.chalkak.adapter.AdapterGridSectioned;
+import kr.ac.pusan.chalkak.data.DataGenerator;
+import kr.ac.pusan.chalkak.model.SectionImage;
 
 public class CameraActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
     private static final String TAG = "android_camera_example";
@@ -29,6 +39,11 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
     private SurfaceView surfaceView;
     private CameraPreview mCameraPreview;
     private View mLayout;
+
+    private RecyclerView recyclerView;
+    private AdapterGridSectioned mAdapter;
+
+    private ImageView button, buttonGallery, buttonCancel, buttonFilter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,8 +62,19 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
 
         surfaceView.setVisibility(View.GONE);
 
+        // Cancel (임시)
+        buttonCancel = (ImageView) findViewById(R.id.button_cancel_caputre);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), GridSectioned.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         // Gallery
-        Button buttonGallery = findViewById(R.id.button_gallery_caputre);
+        buttonGallery = (ImageView) findViewById(R.id.button_gallery_caputre);
         buttonGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +85,7 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
         });
 
         // Capture
-        Button button = findViewById(R.id.button_main_capture);
+        button = (ImageView) findViewById(R.id.button_main_capture);
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -109,6 +135,8 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
             });
             snackbar.show();
         }
+
+        initComponent();
     }
 
     // Call Gallery
@@ -174,5 +202,46 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
                 }
             }
         }
+    }
+
+    // filter
+    private void initComponent() {
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
+        recyclerView.setHasFixedSize(true);
+
+        List<Integer> items_img = DataGenerator.getNatureImages(this);
+        items_img.addAll(DataGenerator.getNatureImages(this));
+        items_img.addAll(DataGenerator.getNatureImages(this));
+        items_img.addAll(DataGenerator.getNatureImages(this));
+        items_img.addAll(DataGenerator.getNatureImages(this));
+
+        List<SectionImage> items = new ArrayList<>();
+        for (Integer i : items_img) {
+            items.add(new SectionImage(i, "IMG_" + i + ".jpg", false));
+        }
+
+        int sect_count = 0;
+        int sect_idx = 0;
+        // List<String> months = DataGenerator.getStringsMonth(this);
+        List<String> tags = DataGenerator.getStringTag(this);
+        for (int i = 0; i < items.size() / 10; i++) {
+            // items.add(sect_count, new SectionImage(-1, months.get(sect_idx), true));
+            items.add(sect_count, new SectionImage(-1, tags.get(sect_idx), true));
+            sect_count = sect_count + 10;
+            sect_idx++;
+        }
+
+        //set data and list adapter
+        mAdapter = new AdapterGridSectioned(this, items);
+        recyclerView.setAdapter(mAdapter);
+
+        // on item list clicked
+        mAdapter.setOnItemClickListener(new AdapterGridSectioned.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, SectionImage obj, int position) {
+
+            }
+        });
     }
 }
