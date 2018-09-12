@@ -91,7 +91,7 @@ public class CardWizardOverlap extends AppCompatActivity {
                 } else {
                     // 수정한 부분
                     // Intent intent = new Intent(getApplicationContext(), BottomSheetBasic.class);
-                    Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), GridSectioned.class);
                     startActivity(intent);
                     finish();
                 }

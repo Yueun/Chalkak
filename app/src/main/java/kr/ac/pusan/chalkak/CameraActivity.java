@@ -3,6 +3,7 @@ package kr.ac.pusan.chalkak;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
     private RecyclerView recyclerView;
     private AdapterGridSectioned mAdapter;
 
-    private ImageView button, buttonGallery, buttonCancel, buttonFilter;
+    private ImageView button, buttonGallery, buttonCancel, buttonFilter, imageFilter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,14 +64,27 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
 
         surfaceView.setVisibility(View.GONE);
 
-        // Cancel (임시)
+        imageFilter = (ImageView) findViewById(R.id.image_filter);
+
+        buttonFilter = (ImageView) findViewById(R.id.button_gallery_filter);
+        buttonFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (recyclerView.getVisibility() == view.INVISIBLE)
+                    recyclerView.setVisibility(View.VISIBLE);
+                else
+                    recyclerView.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        // Cancel
         buttonCancel = (ImageView) findViewById(R.id.button_cancel_caputre);
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), GridSectioned.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileFabMenu.class);
                 startActivity(intent);
-                finish();
+                // finish();
             }
         });
 
@@ -225,12 +240,15 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
         int sect_idx = 0;
         // List<String> months = DataGenerator.getStringsMonth(this);
         List<String> tags = DataGenerator.getStringTag(this);
+
+        /*
         for (int i = 0; i < items.size() / 10; i++) {
             // items.add(sect_count, new SectionImage(-1, months.get(sect_idx), true));
             items.add(sect_count, new SectionImage(-1, tags.get(sect_idx), true));
             sect_count = sect_count + 10;
             sect_idx++;
         }
+        */
 
         //set data and list adapter
         mAdapter = new AdapterGridSectioned(this, items);
@@ -238,9 +256,22 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
 
         // on item list clicked
         mAdapter.setOnItemClickListener(new AdapterGridSectioned.OnItemClickListener() {
+
+            Drawable alpha;
+            int image = 0;
+
             @Override
             public void onItemClick(View view, SectionImage obj, int position) {
-
+                if (image != obj.image) {
+                    imageFilter.setVisibility(View.VISIBLE);
+                    imageFilter.setImageResource(obj.image);
+                    alpha = imageFilter.getDrawable();
+                    alpha.setAlpha(80);
+                    image = obj.image;
+                } else {
+                    imageFilter.setVisibility(View.GONE);
+                    image = 0;
+                }
             }
         });
     }

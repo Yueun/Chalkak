@@ -1,6 +1,7 @@
 package kr.ac.pusan.chalkak;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -108,24 +109,24 @@ GridSectioned extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new AdapterGridSectioned.OnItemClickListener() {
             @Override
             public void onItemClick(View view, SectionImage obj, int position) {
-
+                Intent intent = new Intent(getApplicationContext(), SliderImageCardAuto.class);
+                intent.putExtra("image", obj.image);
+                startActivity(intent);
+                // finish();
             }
         });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_search_setting, menu);
+        getMenuInflater().inflate(R.menu.menu_setting_round, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
+        startActivity(intent);
         return super.onOptionsItemSelected(item);
     }
 

@@ -110,4 +110,6 @@ public class AdapterGridSectioned extends RecyclerView.Adapter<RecyclerView.View
     public int getItemViewType(int position) {
         return this.items.get(position).section ? VIEW_SECTION : VIEW_ITEM;
     }
+
+
 }
