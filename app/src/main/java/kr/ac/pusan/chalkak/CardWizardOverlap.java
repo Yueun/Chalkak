@@ -25,16 +25,16 @@ public class CardWizardOverlap extends AppCompatActivity {
     private Button btnNext;
     private MyViewPagerAdapter myViewPagerAdapter;
     private String about_title_array[] = {
-            "Ready to Travel",
-            "Pick the Ticket",
-            "Flight to Destination",
-            "Enjoy Holiday"
+            "촬영을 준비하세요",
+            "최고의 인생샷을 찾아보세요",
+            "공유하고 평가하세요",
+            "즐기세요"
     };
     private String about_description_array[] = {
-            "Choose your destination, plan Your trip. Pick the best place for Your holiday",
-            "Select the day, pick Your ticket. We give you the best prices. We guarantee!",
-            "Safe and Comfort flight is our priority. Professional crew and services.",
-            "Enjoy your holiday, Don't forget to feel the moment and take a photo!",
+            "찰칵이가 추천해주는 포즈, 장소를 활용하여 자신만의 인생샷을 촬영해보세요",
+            "찰칵이의 추천과 유사도를 비교하여 더욱 더 멋진 인생샷을 만들어보세요",
+            "자신만의 독창적인 인생샷을 공유하고, 다양한 사용자와 비교, 평가할 수 있습니다",
+            "그저 즐겨보세요! 당신의 인생샷은 생각보다 멀지 않은 곳에 있답니다",
     };
     private int about_images_array[] = {
             R.drawable.img_wizard_1,
@@ -68,9 +68,9 @@ public class CardWizardOverlap extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 if (viewPager.getCurrentItem() == about_title_array.length - 1) {
-                    btnNext.setText("Get Started");
+                    btnNext.setText("시작합니다!");
                 } else {
-                    btnNext.setText("Next");
+                    btnNext.setText("다음으로");
                 }
             }
 

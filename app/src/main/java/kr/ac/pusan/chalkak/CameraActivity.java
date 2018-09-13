@@ -238,20 +238,12 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
         recyclerView.setHasFixedSize(true);
 
-        List<Integer> items_img = DataGenerator.getNatureImages(this);
-        items_img.addAll(DataGenerator.getNatureImages(this));
-        items_img.addAll(DataGenerator.getNatureImages(this));
-        items_img.addAll(DataGenerator.getNatureImages(this));
-        items_img.addAll(DataGenerator.getNatureImages(this));
+        List<Integer> items_img = DataGenerator.getFilterImages(this);
 
         List<SectionImage> items = new ArrayList<>();
         for (Integer i : items_img) {
             items.add(new SectionImage(i, "IMG_" + i + ".jpg", false));
         }
-
-        int sect_count = 0;
-        int sect_idx = 0;
-        List<String> tags = DataGenerator.getStringTag(this);
 
         //set data and list adapter
         mAdapter = new AdapterGridSectioned(this, items);

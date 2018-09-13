@@ -80,8 +80,6 @@ public class SliderImageCardAuto extends AppCompatActivity {
         obj.brief = Integer.toString(intent.getIntExtra("section", 0));
         items.add(obj);
 
-        title = obj.name;
-
         adapterImageSlider.setItems(items);
         viewPager.setAdapter(adapterImageSlider);
 
@@ -89,7 +87,6 @@ public class SliderImageCardAuto extends AppCompatActivity {
         viewPager.setCurrentItem(0);
         addBottomDots(layout_dots, adapterImageSlider.getCount(), 0);
         ((TextView) findViewById(R.id.title)).setText(items.get(0).name);
-        ((TextView) findViewById(R.id.brief)).setText(items.get(0).brief);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int pos, float positionOffset, int positionOffsetPixels) {
@@ -98,7 +95,6 @@ public class SliderImageCardAuto extends AppCompatActivity {
             @Override
             public void onPageSelected(int pos) {
                 ((TextView) findViewById(R.id.title)).setText(items.get(pos).name);
-                ((TextView) findViewById(R.id.brief)).setText(items.get(pos).brief);
                 addBottomDots(layout_dots, adapterImageSlider.getCount(), pos);
             }
 
@@ -117,8 +113,6 @@ public class SliderImageCardAuto extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showBottomSheetDialog();
-                // textName = findViewById(R.id.name);
-                // textName.setText(title);
             }
         });
     }
@@ -262,7 +256,8 @@ public class SliderImageCardAuto extends AppCompatActivity {
         (view.findViewById(R.id.bt_details)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Details clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "투표가 완료되었습니다", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

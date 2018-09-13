@@ -19,6 +19,7 @@ import android.widget.Toast;
 import kr.ac.pusan.chalkak.adapter.AdapterGridSectioned;
 import kr.ac.pusan.chalkak.data.DataGenerator;
 import kr.ac.pusan.chalkak.model.SectionImage;
+import kr.ac.pusan.chalkak.utils.BackPressCloseHandler;
 import kr.ac.pusan.chalkak.utils.Tools;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
@@ -40,6 +41,7 @@ GridSectioned extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AdapterGridSectioned mAdapter;
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,13 @@ GridSectioned extends AppCompatActivity {
         initToolbar();
         initComponent();
         initNavigationMenu();
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
+    }
+
+    @Override public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
     }
 
     private void initToolbar() {
@@ -73,7 +82,7 @@ GridSectioned extends AppCompatActivity {
 
         List<SectionImage> items = new ArrayList<>();
         for (Integer i : items_img) {
-            items.add(new SectionImage(i, it.next(), false));
+            items.add(new SectionImage(i, "# " + it.next(), false));
         }
 
         //set data and list adapter
@@ -102,8 +111,14 @@ GridSectioned extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
-        startActivity(intent);
+        if (item.getItemId() == R.id.action_chat) {
+            Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.action_camera) {
+            Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

@@ -32,7 +32,7 @@
                 android:layout_height="280dp"
                 android:foreground="@color/overlay_dark_30"
                 android:scaleType="centerCrop"
-                android:src="@drawable/image_19" />
+                android:src="@drawable/wait" />
 
             <TextView
                 android:id="@+id/textSame"

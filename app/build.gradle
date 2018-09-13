@@ -52,4 +52,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'                   // google gson
     implementation 'com.microsoft.projectoxford:face:1.4.3'            // microsoft cognitive face
     implementation group: 'cz.msebera.android' , name: 'httpclient' , version: '4.4.1.2'
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0' // circle image view
+    implementation 'com.github.bassaer:chatmessageview:1.11.2' // Chat kit
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0' // OKHttp
+    implementation 'com.squareup.okio:okio:2.0.0' // Okio
 }

@@ -69,6 +69,14 @@ public class DataGenerator {
         return items;
     }
 
+    public static List<Integer> getFilterImages(Context ctx) {
+        List<Integer> items = new ArrayList<>();
+        TypedArray drw_arr = ctx.getResources().obtainTypedArray(R.array.sample_filter_images);
+        for (int i = 0; i < drw_arr.length(); i++)
+            items.add(drw_arr.getResourceId(i, -1));
+        return items;
+    }
+
     public static List<String> getStringTag(Context ctx) {
         List<String> items = new ArrayList<>();
         String arr[] = ctx.getResources().getStringArray(R.array.sample_images_name);

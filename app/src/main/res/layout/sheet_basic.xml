@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/spacing_middle"
         android:layout_marginTop="@dimen/spacing_middle"
-        android:text="Name"
+        android:text="평점을 입력해주세요"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/grey_90" />
 

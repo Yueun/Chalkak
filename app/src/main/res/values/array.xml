@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <integer-array name="sample_images">
         <item>@drawable/image_1</item>
         <item>@drawable/image_2</item>
         <item>@drawable/image_3</item>
         <item>@drawable/image_4</item>
         <item>@drawable/image_5</item>
-
         <item>@drawable/image_6</item>
         <item>@drawable/image_7</item>
         <item>@drawable/image_8</item>
@@ -19,27 +17,150 @@
         <item>@drawable/image_13</item>
         <item>@drawable/image_14</item>
         <item>@drawable/image_15</item>
+        <item>@drawable/image_16</item>
+        <item>@drawable/image_17</item>
+        <item>@drawable/image_18</item>
+        <item>@drawable/image_19</item>
+        <item>@drawable/image_20</item>
+
+        <item>@drawable/image_21</item>
+        <item>@drawable/image_22</item>
+        <item>@drawable/image_23</item>
+        <item>@drawable/image_24</item>
+        <item>@drawable/image_25</item>
+        <item>@drawable/image_26</item>
+        <item>@drawable/image_27</item>
+        <item>@drawable/image_28</item>
+        <item>@drawable/image_29</item>
+        <item>@drawable/image_30</item>
+
+        <item>@drawable/image_31</item>
+        <item>@drawable/image_32</item>
+        <item>@drawable/image_33</item>
+        <item>@drawable/image_34</item>
+        <item>@drawable/image_35</item>
+        <item>@drawable/image_36</item>
     </integer-array>
 
     <string-array name="sample_images_name">
-        <item>1라인</item>
-        <item>2라인</item>
-        <item>3라인</item>
-        <item>4라인</item>
-        <item>5라인</item>
+        <item>정문</item>
+        <item>중앙도서관</item>
+        <item>사회관</item>
+        <item>넉넉한 터</item>
+        <item>진리관</item>
+        <item>금정회관</item>
+        <item>박물관</item>
+        <item>문창회관</item>
+        <item>무지개 문</item>
+        <item>기계관</item>
 
-        <item>6라인</item>
-        <item>7라인</item>
-        <item>8라인</item>
-        <item>9라인</item>
-        <item>10라인</item>
+        <item>문창회관</item>
+        <item>운죽정</item>
+        <item>운죽정</item>
+        <item>인문관</item>
+        <item>운죽정</item>
+        <item>샛벌도서관</item>
+        <item>경암체육관</item>
+        <item>경암체육관</item>
+        <item>경암체육관</item>
+        <item>인문관</item>
 
-        <item>11라인</item>
-        <item>12라인</item>
-        <item>13라인</item>
-        <item>14라인</item>
-        <item>15라인</item>
+        <item>중앙도서관</item>
+        <item>중앙도서관</item>
+        <item>중앙도서관</item>
+        <item>배드민턴장</item>
+        <item>정자</item>
+        <item>예술관</item>
+        <item>예술관</item>
+        <item>생물관</item>
+        <item>건설관</item>
+        <item>제도관</item>
+
+        <item>산학협력관</item>
+        <item>약학관</item>
+        <item>박물관</item>
+        <item>생물관</item>
+        <item>건설관</item>
+        <item>산학협력관</item>
     </string-array>
+
+    <integer-array name="sample_filter_images">
+        <item>@drawable/image_1_1</item>
+        <item>@drawable/image_1_2</item>
+        <item>@drawable/image_2_1</item>
+        <item>@drawable/image_2_2</item>
+        <item>@drawable/image_3_1</item>
+        <item>@drawable/image_3_2</item>
+        <item>@drawable/image_4_1</item>
+        <item>@drawable/image_4_2</item>
+        <item>@drawable/image_5_1</item>
+        <item>@drawable/image_5_2</item>
+        <item>@drawable/image_6_1</item>
+        <item>@drawable/image_6_2</item>
+        <item>@drawable/image_7_1</item>
+        <item>@drawable/image_7_2</item>
+        <item>@drawable/image_8_1</item>
+        <item>@drawable/image_8_2</item>
+        <item>@drawable/image_9_1</item>
+        <item>@drawable/image_9_2</item>
+        <item>@drawable/image_10_1</item>
+        <item>@drawable/image_10_2</item>
+
+        <item>@drawable/image_11_1</item>
+        <item>@drawable/image_11_2</item>
+        <item>@drawable/image_12_1</item>
+        <item>@drawable/image_12_2</item>
+        <item>@drawable/image_13_1</item>
+        <item>@drawable/image_13_2</item>
+        <item>@drawable/image_14_1</item>
+        <item>@drawable/image_14_2</item>
+        <item>@drawable/image_15_1</item>
+        <item>@drawable/image_15_2</item>
+        <item>@drawable/image_16_1</item>
+        <item>@drawable/image_16_2</item>
+        <item>@drawable/image_17_1</item>
+        <item>@drawable/image_17_2</item>
+        <item>@drawable/image_18_1</item>
+        <item>@drawable/image_18_2</item>
+        <item>@drawable/image_19_1</item>
+        <item>@drawable/image_19_2</item>
+        <item>@drawable/image_20_1</item>
+        <item>@drawable/image_20_2</item>
+
+        <item>@drawable/image_21_1</item>
+        <item>@drawable/image_21_2</item>
+        <item>@drawable/image_22_1</item>
+        <item>@drawable/image_22_2</item>
+        <item>@drawable/image_23_1</item>
+        <item>@drawable/image_23_2</item>
+        <item>@drawable/image_24_1</item>
+        <item>@drawable/image_24_2</item>
+        <item>@drawable/image_25_1</item>
+        <item>@drawable/image_25_2</item>
+        <item>@drawable/image_26_1</item>
+        <item>@drawable/image_26_2</item>
+        <item>@drawable/image_27_1</item>
+        <item>@drawable/image_27_2</item>
+        <item>@drawable/image_28_1</item>
+        <item>@drawable/image_28_2</item>
+        <item>@drawable/image_29_1</item>
+        <item>@drawable/image_29_2</item>
+        <item>@drawable/image_30_1</item>
+        <item>@drawable/image_30_2</item>
+
+        <item>@drawable/image_31_1</item>
+        <item>@drawable/image_31_2</item>
+        <item>@drawable/image_32_1</item>
+        <item>@drawable/image_32_2</item>
+        <item>@drawable/image_33_1</item>
+        <item>@drawable/image_33_2</item>
+        <item>@drawable/image_34_1</item>
+        <item>@drawable/image_34_2</item>
+        <item>@drawable/image_35_1</item>
+        <item>@drawable/image_35_2</item>
+        <item>@drawable/image_36_1</item>
+        <item>@drawable/image_36_2</item>
+    </integer-array>
 
     <integer-array name="people_images">
         <item>@drawable/photo_male_1</item>

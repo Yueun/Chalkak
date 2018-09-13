@@ -2,9 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_chat"
         android:orderInCategory="100"
-        android:title="Settings"
-        android:icon="@drawable/ic_settings"
+        android:title="Chat"
+        android:icon="@drawable/chat"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_camera"
+        android:orderInCategory="100"
+        android:title="Camera"
+        android:icon="@drawable/camera"
         app:showAsAction="always" />
 </menu>

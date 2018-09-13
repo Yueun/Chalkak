@@ -40,7 +40,7 @@
                     <android.support.v4.view.ViewPager
                         android:id="@+id/pager"
                         android:layout_width="match_parent"
-                        android:layout_height="500dp"
+                        android:layout_height="550dp"
                         android:background="@color/grey_20"
                         android:foreground="@color/overlay_dark_10" />
 
@@ -70,30 +70,6 @@
                             android:layout_marginTop="@dimen/spacing_medium"
                             android:gravity="bottom"
                             android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="@dimen/spacing_large"
-                                    android:layout_height="@dimen/spacing_large"
-                                    android:layout_marginEnd="@dimen/spacing_medium"
-                                    android:layout_marginRight="@dimen/spacing_medium"
-                                    android:tint="@color/grey_60"
-                                    app:srcCompat="@drawable/ic_location" />
-
-                                <TextView
-                                    android:id="@+id/brief"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="The Backpacker"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                                    android:textColor="@color/grey_60" />
-
-                            </LinearLayout>
 
                             <View
                                 android:layout_width="0dp"
@@ -178,6 +154,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="@color/blue_700"
         android:text="투표하기" />
 
     <FrameLayout
