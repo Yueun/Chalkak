@@ -2,6 +2,7 @@ package kr.ac.pusan.chalkak;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,10 +10,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -31,13 +30,11 @@ import com.microsoft.projectoxford.face.FaceServiceRestClient;
 import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
 import com.microsoft.projectoxford.face.contract.FaceRectangle;
+import com.microsoft.projectoxford.face.contract.Glasses;
 import com.microsoft.projectoxford.face.contract.Hair;
 import com.microsoft.projectoxford.face.contract.Makeup;
 
-import kr.ac.pusan.chalkak.utils.Tools;
-
 public class ProfileFabMenu extends AppCompatActivity {
-    private final int PICK_IMAGE = 1;
     private ProgressDialog detectionProgressDialog;
 
     private final String apiEndpoint = "https://japaneast.api.cognitive.microsoft.com/face/v1.0";
@@ -47,27 +44,20 @@ public class ProfileFabMenu extends AppCompatActivity {
             new FaceServiceRestClient(apiEndpoint, subscriptionKey);
 
     private TextView textAge, textSmile, textGender, textEmotion, textMakeup, textHair, textGlass;
+    private ImageView imageSame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_fab_menu);
 
-        // initToolbar();
+        Intent intent = getIntent();
+        String uri = intent.getStringExtra("path");
+
+        imageSame = findViewById(R.id.imageSame);
 
         detectionProgressDialog = new ProgressDialog(this);
-        detectAndFrame(BitmapFactory.decodeResource(getResources(), R.drawable.image_2));
-    }
-
-    private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setTitle("Profile");
-        Tools.setSystemBarColor(this, R.color.deep_orange_500);
+        detectAndFrame(BitmapFactory.decodeFile(uri));
     }
 
     @Override
@@ -148,17 +138,25 @@ public class ProfileFabMenu extends AppCompatActivity {
                     protected void onPostExecute(Face[] result) {
                         //TODO: update face frames
                         detectionProgressDialog.dismiss();
+
                         if(!exceptionMessage.equals("")){
                             showError(exceptionMessage);
                         }
-                        if (result == null) return;
-                        ImageView imageView = findViewById(R.id.imageSame);
-                        imageView.setImageBitmap(
-                                drawFaceRectanglesOnBitmap(imageBitmap, result));
+
+                        if (result == null)
+                            return;
+
+                        imageSame.setImageBitmap(drawFaceRectanglesOnBitmap(imageBitmap, result));
                         imageBitmap.recycle();
 
                         List<Face> faces = new ArrayList<>();
                         faces = Arrays.asList(result);
+
+                        if (faces.size() == 0) {
+                            Toast.makeText(getApplicationContext(), "얼굴을 감지하지 못했습니다.", Toast.LENGTH_LONG).show();
+                            finish();
+                            return;
+                        }
 
                         String age = Double.toString(faces.get(0).faceAttributes.age);
                         String smile = Double.toString(faces.get(0).faceAttributes.smile);
@@ -166,6 +164,8 @@ public class ProfileFabMenu extends AppCompatActivity {
                         String emotion = getEmotion(faces.get(0).faceAttributes.emotion);
                         String makeup = getMakeup(faces.get(0).faceAttributes.makeup);
                         String hair = getHair(faces.get(0).faceAttributes.hair);
+                        Glasses glass = faces.get(0).faceAttributes.glasses;
+                        String sGlass = glass.name();
 
                         textAge = findViewById(R.id.textAge);
                         textSmile = findViewById(R.id.textSmile);
@@ -173,6 +173,7 @@ public class ProfileFabMenu extends AppCompatActivity {
                         textEmotion = findViewById(R.id.textEmotion);
                         textMakeup = findViewById(R.id.textMakeup);
                         textHair = findViewById(R.id.textHair);
+                        textGlass = findViewById(R.id.textGlass);
 
                         textAge.setText(age);
                         textSmile.setText(smile);
@@ -180,6 +181,7 @@ public class ProfileFabMenu extends AppCompatActivity {
                         textEmotion.setText(emotion);
                         textMakeup.setText(makeup);
                         textHair.setText(hair);
+                        textGlass.setText(sGlass);
                     }
 
                     private String getHair(Hair hair) {

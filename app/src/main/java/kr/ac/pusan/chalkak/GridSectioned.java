@@ -1,10 +1,8 @@
 package kr.ac.pusan.chalkak;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +23,7 @@ import kr.ac.pusan.chalkak.utils.Tools;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class
@@ -56,22 +54,12 @@ GridSectioned extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Sectioned");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        */
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.blue_600));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.blue_700));
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-        actionBar.setTitle("Pic Test");
-        Tools.setSystemBarColor(this, R.color.blue_700);
     }
 
     private void initComponent() {
@@ -79,26 +67,13 @@ GridSectioned extends AppCompatActivity {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setHasFixedSize(true);
 
-        List<Integer> items_img = DataGenerator.getNatureImages(this);
-        items_img.addAll(DataGenerator.getNatureImages(this));
-        items_img.addAll(DataGenerator.getNatureImages(this));
-        items_img.addAll(DataGenerator.getNatureImages(this));
-        items_img.addAll(DataGenerator.getNatureImages(this));
+        List<Integer> items_img = DataGenerator.getImages(this);
+        List<String> tags = DataGenerator.getStringTag(this);
+        Iterator<String> it = tags.iterator();
 
         List<SectionImage> items = new ArrayList<>();
         for (Integer i : items_img) {
-            items.add(new SectionImage(i, "IMG_" + i + ".jpg", false));
-        }
-
-        int sect_count = 0;
-        int sect_idx = 0;
-        // List<String> months = DataGenerator.getStringsMonth(this);
-        List<String> tags = DataGenerator.getStringTag(this);
-        for (int i = 0; i < items.size() / 10; i++) {
-            // items.add(sect_count, new SectionImage(-1, months.get(sect_idx), true));
-            items.add(sect_count, new SectionImage(-1, tags.get(sect_idx), true));
-            sect_count = sect_count + 10;
-            sect_idx++;
+            items.add(new SectionImage(i, it.next(), false));
         }
 
         //set data and list adapter
@@ -111,6 +86,8 @@ GridSectioned extends AppCompatActivity {
             public void onItemClick(View view, SectionImage obj, int position) {
                 Intent intent = new Intent(getApplicationContext(), SliderImageCardAuto.class);
                 intent.putExtra("image", obj.image);
+                intent.putExtra("title", obj.title);
+                intent.putExtra("section", obj.section);
                 startActivity(intent);
                 // finish();
             }

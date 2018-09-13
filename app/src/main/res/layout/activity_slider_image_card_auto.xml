@@ -4,16 +4,7 @@
     android:id="@+id/parent_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_10">
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include layout="@layout/toolbar" />
-
-    </android.support.design.widget.AppBarLayout>
+    android:background="@color/mdtp_white">
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
@@ -49,7 +40,7 @@
                     <android.support.v4.view.ViewPager
                         android:id="@+id/pager"
                         android:layout_width="match_parent"
-                        android:layout_height="450dp"
+                        android:layout_height="500dp"
                         android:background="@color/grey_20"
                         android:foreground="@color/overlay_dark_10" />
 
@@ -187,7 +178,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="Vote" />
+        android:text="투표하기" />
 
     <FrameLayout
         android:id="@+id/bottom_sheet"

@@ -3,6 +3,7 @@ package kr.ac.pusan.chalkak;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.net.Uri;
@@ -18,9 +19,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,7 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
     private static final int CAMERA_FACING = Camera.CameraInfo.CAMERA_FACING_BACK; // Camera.CameraInfo.CAMERA_FACING_FRONT
 
     private static final int PICK_FROM_ALBUM = 1;
+
     private Uri mImageCaputreUri;
 
     private SurfaceView surfaceView;
@@ -82,9 +82,7 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ProfileFabMenu.class);
-                startActivity(intent);
-                // finish();
+                finish();
             }
         });
 
@@ -94,7 +92,8 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("*/*");
                 startActivityForResult(intent, PICK_FROM_ALBUM);
             }
         });
@@ -165,7 +164,21 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
         switch(requestCode) {
             case PICK_FROM_ALBUM:
                 mImageCaputreUri = data.getData();
+                Intent intent = new Intent(getApplicationContext(), ProfileFabMenu.class);
+                intent.putExtra("path", getRealPathFromURI(mImageCaputreUri));
+                startActivity(intent);
         }
+    }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        int column_index=0;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if(cursor.moveToFirst()){
+            column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        }
+
+        return cursor.getString(column_index);
     }
 
     void startCamera(){
@@ -238,17 +251,7 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
 
         int sect_count = 0;
         int sect_idx = 0;
-        // List<String> months = DataGenerator.getStringsMonth(this);
         List<String> tags = DataGenerator.getStringTag(this);
-
-        /*
-        for (int i = 0; i < items.size() / 10; i++) {
-            // items.add(sect_count, new SectionImage(-1, months.get(sect_idx), true));
-            items.add(sect_count, new SectionImage(-1, tags.get(sect_idx), true));
-            sect_count = sect_count + 10;
-            sect_idx++;
-        }
-        */
 
         //set data and list adapter
         mAdapter = new AdapterGridSectioned(this, items);

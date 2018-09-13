@@ -30,15 +30,15 @@
 
         <item>6라인</item>
         <item>7라인</item>
-        <item>6라인</item>
-        <item>7라인</item>
-        <item>6라인</item>
+        <item>8라인</item>
+        <item>9라인</item>
+        <item>10라인</item>
 
-        <item>7라인</item>
-        <item>6라인</item>
-        <item>7라인</item>
-        <item>6라인</item>
-        <item>7라인</item>
+        <item>11라인</item>
+        <item>12라인</item>
+        <item>13라인</item>
+        <item>14라인</item>
+        <item>15라인</item>
     </string-array>
 
     <integer-array name="people_images">

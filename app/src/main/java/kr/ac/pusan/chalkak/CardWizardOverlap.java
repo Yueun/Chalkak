@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import kr.ac.pusan.chalkak.R;
 import kr.ac.pusan.chalkak.utils.Tools;
 
 public class CardWizardOverlap extends AppCompatActivity {
@@ -89,8 +88,6 @@ public class CardWizardOverlap extends AppCompatActivity {
                     // move to next screen
                     viewPager.setCurrentItem(current);
                 } else {
-                    // 수정한 부분
-                    // Intent intent = new Intent(getApplicationContext(), BottomSheetBasic.class);
                     Intent intent = new Intent(getApplicationContext(), GridSectioned.class);
                     startActivity(intent);
                     finish();

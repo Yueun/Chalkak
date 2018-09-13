@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -279,7 +278,6 @@ class CameraPreview extends ViewGroup implements SurfaceHolder.Callback {
             byte[] currentData = stream.toByteArray();
 
             new SaveImageTask().execute(currentData);
-
         }
     };
 

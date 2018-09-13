@@ -14,9 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,9 +31,7 @@ import android.widget.Toast;
 import com.balysv.materialripple.MaterialRippleLayout;
 
 import kr.ac.pusan.chalkak.adapter.AdapterPeople;
-import kr.ac.pusan.chalkak.data.DataGenerator;
 import kr.ac.pusan.chalkak.model.Image;
-import kr.ac.pusan.chalkak.model.People;
 import kr.ac.pusan.chalkak.utils.Tools;
 
 import java.util.ArrayList;
@@ -58,46 +54,15 @@ public class SliderImageCardAuto extends AppCompatActivity {
     private View bottom_sheet;
 
     private Button buttonVote;
+    private TextView textName;
 
-    private static int[] array_image_place = {
-            R.drawable.image_12,
-            R.drawable.image_13,
-            R.drawable.image_14,
-            R.drawable.image_15,
-            R.drawable.image_8,
-    };
-
-    private static String[] array_title_place = {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-    };
-
-    private static String[] array_brief_place = {
-            "설명1",
-            "설명2",
-            "설명3",
-            "설명4",
-            "설명5",
-    };
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider_image_card_auto);
-
-        // initToolbar();
         initComponent();
-    }
-
-    private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Places");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initComponent() {
@@ -111,19 +76,11 @@ public class SliderImageCardAuto extends AppCompatActivity {
         Image obj = new Image();
         obj.image = intent.getIntExtra("image", 0);
         obj.imageDrw = getResources().getDrawable(obj.image);
-        obj.name = "HashTag";
-        obj.brief = "Location";
+        obj.name = intent.getStringExtra("title");
+        obj.brief = Integer.toString(intent.getIntExtra("section", 0));
         items.add(obj);
 
-        /* for (int i = 0; i < array_image_place.length; i++) {
-            Image obj = new Image();
-            // obj.image = array_image_place[i];
-            obj.image = intent.getIntExtra("image", 0);
-            obj.imageDrw = getResources().getDrawable(obj.image);
-            obj.name = array_title_place[i];
-            obj.brief = array_brief_place[i];
-            items.add(obj);
-        } */
+        title = obj.name;
 
         adapterImageSlider.setItems(items);
         viewPager.setAdapter(adapterImageSlider);
@@ -152,21 +109,6 @@ public class SliderImageCardAuto extends AppCompatActivity {
 
         startAutoSlider(adapterImageSlider.getCount());
 
-        /*
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //set data and list adapter
-        adapter = new AdapterPeople(this, DataGenerator.getPeopleData(this));
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new AdapterPeople.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, People obj, int pos) {
-                showBottomSheetDialog(obj);
-            }
-        });
-        */
-
         bottom_sheet = findViewById(R.id.bottom_sheet);
         mBehavior = BottomSheetBehavior.from(bottom_sheet);
 
@@ -175,6 +117,8 @@ public class SliderImageCardAuto extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showBottomSheetDialog();
+                // textName = findViewById(R.id.name);
+                // textName.setText(title);
             }
         });
     }
@@ -308,8 +252,6 @@ public class SliderImageCardAuto extends AppCompatActivity {
         }
 
         final View view = getLayoutInflater().inflate(R.layout.sheet_basic, null);
-        // ((TextView) view.findViewById(R.id.name)).setText(people.name);
-        ((TextView) view.findViewById(R.id.address)).setText(R.string.middle_lorem_ipsum);
         (view.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

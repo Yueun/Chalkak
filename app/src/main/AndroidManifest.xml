@@ -23,12 +23,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".CardWizardOverlap" />
-        <activity android:name=".BottomSheetBasic" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".GridSectioned" />
         <activity android:name=".SliderImageCardAuto" />
         <activity android:name=".ProfileFabMenu" />
-        <!-- activity !-->
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="kr.ac.pusan.chalkak"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
     </application>
 
 </manifest>
