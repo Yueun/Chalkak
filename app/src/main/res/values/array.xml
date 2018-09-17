@@ -3,7 +3,7 @@
     <integer-array name="sample_images">
         <item>@drawable/image_1</item>
         <item>@drawable/image_2</item>
-        <item>@drawable/image_3</item>
+
         <item>@drawable/image_4</item>
         <item>@drawable/image_5</item>
         <item>@drawable/image_6</item>
@@ -30,7 +30,7 @@
         <item>@drawable/image_25</item>
         <item>@drawable/image_26</item>
         <item>@drawable/image_27</item>
-        <item>@drawable/image_28</item>
+
         <item>@drawable/image_29</item>
         <item>@drawable/image_30</item>
 
@@ -39,13 +39,13 @@
         <item>@drawable/image_33</item>
         <item>@drawable/image_34</item>
         <item>@drawable/image_35</item>
-        <item>@drawable/image_36</item>
+
     </integer-array>
 
     <string-array name="sample_images_name">
         <item>정문</item>
         <item>중앙도서관</item>
-        <item>사회관</item>
+
         <item>넉넉한 터</item>
         <item>진리관</item>
         <item>금정회관</item>
@@ -72,7 +72,7 @@
         <item>정자</item>
         <item>예술관</item>
         <item>예술관</item>
-        <item>생물관</item>
+
         <item>건설관</item>
         <item>제도관</item>
 
@@ -81,7 +81,7 @@
         <item>박물관</item>
         <item>생물관</item>
         <item>건설관</item>
-        <item>산학협력관</item>
+
     </string-array>
 
     <integer-array name="sample_filter_images">
@@ -89,8 +89,7 @@
         <item>@drawable/image_1_2</item>
         <item>@drawable/image_2_1</item>
         <item>@drawable/image_2_2</item>
-        <item>@drawable/image_3_1</item>
-        <item>@drawable/image_3_2</item>
+
         <item>@drawable/image_4_1</item>
         <item>@drawable/image_4_2</item>
         <item>@drawable/image_5_1</item>
@@ -141,8 +140,7 @@
         <item>@drawable/image_26_2</item>
         <item>@drawable/image_27_1</item>
         <item>@drawable/image_27_2</item>
-        <item>@drawable/image_28_1</item>
-        <item>@drawable/image_28_2</item>
+
         <item>@drawable/image_29_1</item>
         <item>@drawable/image_29_2</item>
         <item>@drawable/image_30_1</item>
@@ -158,8 +156,7 @@
         <item>@drawable/image_34_2</item>
         <item>@drawable/image_35_1</item>
         <item>@drawable/image_35_2</item>
-        <item>@drawable/image_36_1</item>
-        <item>@drawable/image_36_2</item>
+
     </integer-array>
 
     <integer-array name="people_images">

@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -20,10 +21,12 @@ import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
@@ -34,6 +37,15 @@ import com.microsoft.projectoxford.face.contract.Glasses;
 import com.microsoft.projectoxford.face.contract.Hair;
 import com.microsoft.projectoxford.face.contract.Makeup;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class ProfileFabMenu extends AppCompatActivity {
     private ProgressDialog detectionProgressDialog;
 
@@ -43,7 +55,7 @@ public class ProfileFabMenu extends AppCompatActivity {
     private final FaceServiceClient faceServiceClient =
             new FaceServiceRestClient(apiEndpoint, subscriptionKey);
 
-    private TextView textAge, textSmile, textGender, textEmotion, textMakeup, textHair, textGlass;
+    private TextView textAge, textSmile, textGender, textEmotion, textMakeup, textHair, textGlass, textPersent;
     private ImageView imageSame;
 
     @Override
@@ -54,6 +66,7 @@ public class ProfileFabMenu extends AppCompatActivity {
         Intent intent = getIntent();
         String uri = intent.getStringExtra("path");
 
+        textPersent = findViewById(R.id.textPersent);
         imageSame = findViewById(R.id.imageSame);
 
         detectionProgressDialog = new ProgressDialog(this);
@@ -79,7 +92,7 @@ public class ProfileFabMenu extends AppCompatActivity {
     // Detect faces by uploading a face image.
     // Frame faces after detection.
     private void detectAndFrame(final Bitmap imageBitmap) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         ByteArrayInputStream inputStream =
                 new ByteArrayInputStream(outputStream.toByteArray());
@@ -263,6 +276,36 @@ public class ProfileFabMenu extends AppCompatActivity {
                 };
 
         detectTask.execute(inputStream);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Example data
+                final String URL = "http://222.97.247.238:9080/api/test";
+
+                OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(30, TimeUnit.SECONDS)
+                        .readTimeout(30, TimeUnit.SECONDS).writeTimeout(30, TimeUnit.SECONDS).build();
+
+                RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpeg"), outputStream.toByteArray());
+
+                Request request = new Request.Builder()
+                        .url(URL)
+                        .post(requestBody)
+                        .build();
+
+                try (Response response = client.newCall(request).execute()) {
+                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    String val = jsonObject.get("pose").toString();
+
+                    Log.i("CHALKAK", response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private void showError(String message) {
